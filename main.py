@@ -6,9 +6,6 @@ import asyncio
 from dotenv import load_dotenv
 
 
-load_dotenv()
-
-
 def get_comic(random_number):
     url = f'https://xkcd.com/{random_number}/info.0.json'
     response = requests.get(url)
@@ -33,13 +30,6 @@ def get_all_comics():
     return all_number
 
 
-random_number = random.randint(0, get_all_comics())
-comment, img = get_comic(random_number)
-
-
-download(img, 'Comic.png')
-
-
 async def publication_img():
     tg_token = os.environ['TELEGRAM_TOKEN']
     chat_id = os.environ['TG_CHAT_ID']
@@ -49,4 +39,13 @@ async def publication_img():
     os.remove('Comic.png', dir_fd=None)
 
 
-asyncio.run(publication_img())
+def main():
+    load_dotenv()
+    random_number = random.randint(0, get_all_comics())
+    comment, img = get_comic(random_number)
+    download(img, 'Comic.png')
+    asyncio.run(publication_img())
+
+
+if __name__ == '__main__':
+    main()
