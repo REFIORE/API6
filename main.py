@@ -30,7 +30,7 @@ def get_all_comics():
     return all_number
 
 
-async def publication_img():
+async def publish_img():
     tg_token = os.environ['TELEGRAM_TOKEN']
     chat_id = os.environ['TG_CHAT_ID']
     bot = telegram.Bot(token=tg_token)
